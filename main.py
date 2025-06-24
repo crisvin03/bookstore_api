@@ -1,20 +1,18 @@
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import List
-from contextlib import asynccontextmanager  
 
 from database import engine, AsyncSessionLocal, Base
 import models, schemas, crud
 
-# Lifespan handler 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
+# Initialize FastAPI app
+app = FastAPI(title="📚 Bookstore API")
+
+# Create all tables at startup
+@app.on_event("startup")
+async def startup():
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
-    yield
-
-# Initialize FastAPI app using the lifespan handler
-app = FastAPI(title="📚 Bookstore API", lifespan=lifespan)
 
 # Dependency that provides an async database session
 async def get_db():
