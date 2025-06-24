@@ -90,7 +90,6 @@ sqlalchemy
 aiosqlite
 pydantic
 pytest
-httpx
 ```
 
 ---
