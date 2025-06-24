@@ -62,7 +62,7 @@ pip install aiosqlite
 ### 4. ✅ Run the app using Uvicorn
 
 ```bash
-uvicorn main:app --reload
+python -m uvicorn main:app --reload
 ```
 
 📍 Visit: [http://127.0.0.1:8000](http://127.0.0.1:8000)  
